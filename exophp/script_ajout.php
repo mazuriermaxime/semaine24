@@ -2,14 +2,9 @@
 <?php
 var_dump($_POST);
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "jarditou";
-
 // Récupération des informations passées en POST, nécessaires à la modification
 $pro_id=$_POST['id'];
-$pro_cat_id=$_POST['cat_id']; ²
+$pro_cat_id=$_POST['cat_id']; 
 $pro_ref=$_POST['reference'];
 $pro_libelle=$_POST['libelle'];
 $pro_description=$_POST['description'];
@@ -21,33 +16,49 @@ $pro_d_ajout=$_POST['date ajout'];
 $pro_d_modif=$_POST['date modif'];
 $pro_bloque=$_POST['bloque'];
 
+// Connexion à la base de données
+
+require "connexion_bdd.php";
+
+
 try {
-  $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-  // set the PDO error mode to exception
-  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+ $requete = $db->prepare("INSERT INTO produits (pro_id, pro_cat_id, pro_ref, pro_libelle, pro_description, pro_prix, pro_stock, pro_couleur, pro_photo, pro_d_ajout, pro_d_modif, pro_bloque ) 
+ VALUES (:pro_id, :pro_cat_id, :pro_ref, :pro_libelle, :pro_description, :pro_prix, :pro_stock, :pro_couleur, :pro_photo, :pro_d_ajout, :pro_d_modif, :ro_bloque)");
 
   
-  $stmt = $conn->prepare("INSERT INTO produits (pro_id, pro_cat_id, pro_ref, pro_libelle, pro_description, pro_prix, pro_stock, pro_couleur, pro_photo, pro_d_ajout, pro_d_modif, pro_bloque ) 
-  VALUES (:pro_id, :pro_cat_id, :pro_ref, :pro_libelle, :pro_description, :pro_prix, :pro_stock, :pro_couleur, :pro_photo, :pro_d_ajout, :pro_d_modif, :ro_bloque)");
-  $stmt->bindParam(':pro_id', $pro_id);
-  $stmt->bindParam(':pro_cat_id', $pro_cat_id);
-  $stmt->bindParam(':pro_ref', $pro_ref);
-  $stmt->bindParam(':pro_libelle', $pro_libelle);
-  $stmt->bindParam(':pro_description', $pro_description);
-  $stmt->bindParam(':pro_prix', $pro_prix);
-  $stmt->bindParam(':pro_stock', $pro_stock);
-  $stmt->bindParam(':pro_couleur', $pro_couleur);
-  $stmt->bindParam(':pro_photo', $pro_photo);
-  $stmt->bindParam(':pro_d_ajout', $pro_d_ajout);
-  $stmt->bindParam(':pro_d_modif', $pro_d_modif);
-  $stmt->bindParam(':pro_bloque', $pro_bloque);
-  $stmt->execute();
+ $requete->bindValue(':pro_id', $pro_id, PDO::PARAM_INT);
+ $requete->bindValue(':pro_cat_id', $pro_cat_id, PDO::PARAM_INT);
+ $requete->bindValue(':pro_ref', $pro_ref, PDO::PARAM_STR);
+ $requete->bindValue(':pro_libelle', $pro_libelle, PDO::PARAM_STR);
+ $requete->bindValue(':pro_description', $pro_description, PDO::PARAM_STR);
+ $requete->bindValue(':pro_prix', $pro_prix, PDO::PARAM_INT);
+ $requete->bindValue(':pro_stock', $pro_stock, PDO::PARAM_INT);
+ $requete->bindValue(':pro_couleur', $pro_couleur, PDO::PARAM_STR);
+ $requete->bindValue(':pro_photo', $pro_photo, PDO::PARAM_STR);
+ $requete->bindValue(':pro_d_ajout', $pro_d_ajout, PDO::PARAM_INT);
+ $requete->bindValue(':pro_d_modif', $pro_d_modif, PDO::PARAM_INT);
+ $requete->bindValue(':pro_bloque', $pro_bloque, PDO::PARAM_BOOL);
+ $requete->execute();
 
-  
-  echo "ajout bien réaliser!!!";
-} catch(PDOException $e) {
-  echo "Error: " . $e->getMessage();
+
+// Exécution de la requête
+$requete->execute();
+
+// Libération de la connexion au serveur de BDD
+$requete->closeCursor();
 }
-$conn = null;
-?>
+// Gestion des erreurs
+catch (Exception $e) {
+
+  echo "La connexion à la base de données a échoué ! <br>";
+  echo "Merci de bien vérifier vos paramètres de connexion ...<br>";
+  echo "Erreur : " . $e->getMessage() . "<br>";
+  echo "N° : " . $e->getCode();
+  die("Fin du script");
+}
+
+// Redirection vers la page index.php
+header("Location: index.php");
+exit;
+
 

@@ -1,4 +1,4 @@
-<html>
+<php>
 
 
 <head>
@@ -30,12 +30,12 @@
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                     <li class="nav-item active">
-                        <a class="nav-link" href="Index.html">Accueil <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="index.php">Accueil <span class="sr-only">(current)</span></a>
                         <li class="nav-item">
-                            <a class="nav-link" href="tableau.html">Tableau</a>
+                            <a class="nav-link" href="tableau.php">Tableau</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="contact.html" tabindex="-1" aria-disabled="true">Contact</a>
+                            <a class="nav-link" href="contact.php" tabindex="-1" aria-disabled="true">Contact</a>
                         </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
@@ -137,13 +137,13 @@
             <div class="collapse navbar-collapse " id="collapsibleNavbar ">
                 <ul class="navbar-nav ">
                     <li class="nav-item ">
-                        <a class="nav-link " href="Index.html">Mention légales</a>
+                        <a class="nav-link " href="Index.php">Mention légales</a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link " href="Index.html">Horaires</a>
+                        <a class="nav-link " href="Index.php">Horaires</a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link " href="Index.html">Plan du site</a>
+                        <a class="nav-link " href="Index.php">Plan du site</a>
                     </li>
                 </ul>
             </div>
@@ -156,5 +156,5 @@
 
 
 
-</html>
+</php>
 <input type="number" name="nom" id="number" maxlength="10" required size="code">

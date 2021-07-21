@@ -59,49 +59,57 @@
     <br>
 
     <form action ="script_ajout.php" method="post">
-
+                
+                <div class="form-group">
+                    <label for="Veuillez saisir la Réference">Réference*</label>
+                    <input type="text" name="pro_ref" class="form-control" id="Veuillez saisir la Réference" placeholder="Veuillez saisir la Réference">
+                </div>
+                <div class="form-group">
+                    <label for="Veuillez saisir le libelle">Libelle*</label>
+                    <input type="text" name="pro_libelle" class="form-control" id="Veuillez saisir le libelle" placeholder="Veuillez saisir le libelle">
+                </div>
     
-    <div>
-        <label for="name">Réference :</label>
-        <input type="text" id="pro_ref" name="pro_ref" value="">
-    </div>
-    <div>
-        <label for="name">Libelle :</label>
-        <input type="text" id="pro_libelle" name="pro_libelle" value="">
-    </div>
-    <div>
-        <label for="name">déscription :</label>
-        <input type="text" id="pro_description" name="pro_description" value="">
-    </div>
-    <div>
-        <label for="name">Prix :</label>
-        <input type="text" id="pro_prix" name="pro_prix" value="">
-    </div>
-    <div>
-        <label for="name">Stock :</label>
-        <input type="text" id="pro_stock" name="pro_stock" value="">
-    </div>
-    <div>
-        <label for="name">Couleur :</label>
-        <input type="text" id="pro_couleur" name="pro_couleur" value="">
-    </div>
-    <div>
-        <label for="name">Image :</label>
-        <input type="text" id="pro_photo" name="pro_photo" value="">
-    </div>
-    <div>
-        <label for="name">Date d'ajout :</label>
-        <input type="text" id="pro_d_ajout" name="pro_d_ajout" value="">
-    </div>
-    <div>
-        <label for="name">Date de Modification :</label>
-        <input type="text" id="pro_d_modif" name="pro_d_modif" value="">
-    </div>
-    <div>
-        <label for="name">Bloque :</label>
-        <input type="text" id="pro_bloque" name="pro_bloque" value="">
-    </div>
-    <div>
+                <div class="form-group">
+                    <label for="Veuillez saisir la déscription">Déscription*</label>
+                    <input type="text" name="pro_description" class="form-control" id="Veuillez saisir la déscription" placeholder="Veuillez saisir la déscription">
+                </div>
+                <div class="form-group">
+                    <label for="Veuillez saisir le prix">Prix*</label>
+                    <input type="text" name="pro_prix" class="form-control" id="Veuillez saisir le prix" placeholder="Veuillez saisir le prix">
+                </div>
+                <div class="form-group">
+                    <label for="Veuillez saisir le stock">Stock*</label>
+                    <input type="text" name="pro_stock" class="form-control" id="Veuillez saisir le stock" placeholder="Veuillez saisir le stock">
+                </div>
+                <div class="form-group">
+                    <label for="Veuillez saisir la couleur">Couleur*</label>
+                    <input type="text" name="pro_couleur" class="form-control" id="Veuillez saisir la couleur" placeholder="Veuillez saisir la couleur">
+                </div>
+                <div class="form-group">
+                    <label for="Veuillez saisir la date d'ajout">Date d'ajout*</label>
+                    <input type="text" name="pro_d_ajout" class="form-control" id="Veuillez saisir la date d'ajout" placeholder="Veuillez saisir la date d'ajout">
+                </div>
+                <div class="form-group">
+                    <label for="Veuillez saisir la date de Modification">Date de Modification*</label>
+                    <input type="text" name="pro_d_modif" class="form-control" id="Veuillez saisir la date de Modification" placeholder="Veuillez saisir la date de Modification">
+                </div>
+                <div class="form-group">
+                <p>Article bloquer : </p>
+                <p>
+	
+	                    Oui: <input type="radio" name="citizenship" /><br />
+	                    Non: <input type="radio" name="citizenship" />
+	                    
+                </p>
+                </div>
+                <div>
+                <form action="upload.php" method="post" enctype="multipart/form-data">
+                    <h2>Upload Fichier</h2>
+                    <label for="fileUpload">Fichier:</label>
+                    <input type="file" name="pro_image" id="fileUpload">
+                    <input type="submit" name="submit" value="Upload">
+                    <p><strong>Note:</strong> Seuls les formats .jpg, .jpeg, .jpeg, .gif, .png sont autorisés jusqu'à une taille maximale de 5 Mo.</p>
+                </div>
 
     <button type="submit" class="button">Ajouter un produit</button>
     </form>

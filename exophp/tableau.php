@@ -1,160 +1,134 @@
-<!DOCTYPE html>
+<!-- <!doctype html> -->
 
-<html lang=fr>
+<?php
+//include("connexion_bdd.php");
+include("header.php");
+// <!-- titre de la page -->
+?>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="jarditou.css">
-    <link rel="stylsheet" media="screen and (max-widht: 576px)" href="jarditou.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <style>
-         .button {
-            background-color: #1c87c9;
-            box-shadow: 0 5px 0 #105cad;
-            color: white;
-           padding: 1em 1.5em;
-           position: relative;
-           text-decoration: none;
-           display: inline-block;
-        }
-      </style>
 
-    <title>jarditou</title>
-</head>
+<div class="row shadow mt-3 mb-3 mx-0 p-3 rounded bg-dark">
+  <div class="col-md-2 text white-50 text-right"></div>
+  <div class="col-md-8 h2 text-white-50 text-center">Tableau</div>
+  <div class="col-2 text-center">
+  <a class="text-white-50 nav-link" href="produits_ajout.php">Ajouter un produit</a>
+  </div>
+</div>
 
-<body>
-    <div class="container-fluid">
-        <div id="header">
-            <img src="Jarditou_photos/jarditou_logo.jpg" id="logo" height="80" width="200" alt="Logo jarditou">
-            <div class="float-right">
-                <h1>Tout le jardin</h1>
-            </div>
-        </div>
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <a class="navbar-brand" href="#">Jarditou.com</a>
-
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="Index.html">Accueil <span class="sr-only">(current)</span></a>
-                        <li class="nav-item">
-                            <a class="nav-link" href="tableau.html">Tableau</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="contact.html" tabindex="-1" aria-disabled="true">Contact</a>
-                        </li>
-                </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="Votre promotion" placeholder="Votre promotion" aria-label="Votre promotion">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
-                </form>
-            </div>
-        </nav>
-
-        <img src="Jarditou_photos/promotion.jpg" class="img-fluid" height="auto" width="1900" alt="Promotion">
-
-        <div class="table-responsive-sm">
-            <table class="table table-bordered">
-                <thead class="thead-light">
-                    <tr>
-                        <th>Photo</th>
+<!-- Tableau -->
+            <div class="row">
+                <div class="col-12 col-md-12">
+                  <div class="table-responsive">
+                    <table class="table table-striped table-hover table-bordered">
+                    <thead>
+                    <tr class="table-secondary">
+                        <th class="w-25">Photo</th>
                         <th>ID</th>
-                        <th>Cat&eacute;gorie</th>
-                        <th>Libell&eacute;</th>
+                        <th>Réference</th>
+                        <th>Libellé</th>
                         <th>Prix</th>
+                        <th>Stock</th>
                         <th>Couleur</th>
-                    </tr>
-                </thead>
+                        <th>Ajout</th>
+                        <th>Modif</th>
+                        <th>Bloqué</th>
+                    </tr>   
+                    </thead>
+                    <tbody> 
+            </div>
+                </div>
+                    </div>
+                    <?php
+    require "connexion_bdd.php"; // Inclusion de notre bibliothèque de fonctions
+    $db = connexionBase(); // Appel de la fonction de connexion
+    $requete = "SELECT * FROM produits";
+
+    $result = $db->query($requete);
+
+    if (!$result) 
+    {
+        $tableauErreurs = $db->errorInfo();
+        echo $tableauErreur[2]; 
+        die("Erreur dans la requête");
+    }
+
+    if ($result->rowCount() == 0) 
+    {
+       // Pas d'enregistrement
+       die("La table est vide");
+    }
+    while ($row = $result->fetch(PDO::FETCH_OBJ))
+    {
+        // echo"<tr>";
+        // echo"<td>".$row->pro_id."</td>";
+        // echo"<td>".$row->pro_cat_id."</td>";
+        // echo"<td>".$row->pro_ref."</td>";
+        // echo '<td><a href="detail.php?id='.$row->pro_id.'" title='.$row->pro_libelle.'>'.$row->pro_libelle.'</a></td>';
+        // echo"</tr>";
 
 
-                <tbody>
-                    <tr class="table-warning">
-                        <td><img src="jarditou_photos/7.jpg" alt="photo barbecues" height="100" width="auto"></td>
-                        <td>7</td>
-                        <td>Barbecues</td>
-                        <td>Aramis</td>
-                        <td>110.00&#8364;</td>
-                        <td>Brun</td>
-                    </tr>
-                </tbody>
-
-                <tbody>
-                    <tr>
-                        <td><img src="jarditou_photos/8.jpg" height="100" width="auto"></td>
-                        <td>8</td>
-                        <td>Barbecues</td>
-                        <td>Athos</td>
-                        <td>249.99&#8364;</td>
-                        <td>Noir</td>
-                    </tr>
-                </tbody>
-
-                <tbody>
-                    <tr class="table-warning">
-                        <td><img src="jarditou_photos/11.jpg" height="100" width="auto"></td>
-                        <td>11</td>
-                        <td>Barbecues</td>
-                        <td>Clatronic</td>
-                        <td>135.90&#8364;</td>
-                        <td>Chrome</td>
-                    </tr>
-                </tbody>
-
-                <tbody>
-                    <tr>
-                        <td><img src="jarditou_photos/12.jpg" height="100" width="auto"></td>
-                        <td>12</td>
-                        <td>Barbecues</td>
-                        <td>Camping</td>
-                        <td>88.00&#8364;</td>
-                        <td>Noir</td>
-                    </tr>
-                </tbody>
-
-                <tbody>
-                    <tr class="table-warning">
-                        <td><img src="jarditou_photos/13.jpg" height="100" width="auto"></td>
-                        <td>13</td>
-                        <td>Brouette</td>
-                        <td>Green</td>
-                        <td>49.00&#8364;</td>
-                        <td>Verte</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <a href="create.php" class="button">Ajouter un produit</a>
-    <a href="update.php" class="button">Modifier un produit</a>
-    <nav class=" navbar navbar-expand-sm bg-dark navbar-dark ">
-        <!-- Toggler/collapsibe Button -->
-        <button class="navbar-toggler " type="button " data-toggle="collapse " data-target="#collapsibleNavbar ">
-                    <span class="navbar-toggler-icon "></span>
-            </button>
-        <div class="collapse navbar-collapse " id="collapsibleNavbar ">
-            <ul class="navbar-nav ">
-                <li class="nav-item ">
-                    <a class="nav-link " href="Index.html">Mention légales</a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link " href="Index.html">Horaires</a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link " href="Index.html">Plan du site</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-</body>
+        echo '<tr class="bg-warning">';
+        echo '<td><img src="images/produits/png'.$row->pro_id.'.png" class="img-fluid" alt="Image responsive"></td>';
+        echo "<td>".$row->pro_id."</td>";
+        echo "<td>".$row->pro_ref."</td>";
+        echo '<td><a href="detail.php?id='.$row->pro_id.'" title='.$row->pro_libelle.'>'.$row->pro_libelle.'</a></td>';
+        echo "<td>".$row->pro_prix."</td>";
+        echo "<td>".$row->pro_stock."</td>";
+        echo "<td>".$row->pro_couleur."</td>";
+        echo "<td>".$row->pro_d_ajout."</td>";
+        echo "<td>".$row->pro_d_modif."</td>";
+        $bloque = "";
+        if(($row->pro_bloque)==1)
+        {
+            $bloque="bloqué";
+            echo '<td><p class="bg-danger text-white">'.$bloque."</p></td>";
+        }
+        else
+        {
+            echo "<td>".$bloque."</td>";
+        }
+        
+        // <td>7</td>
+        // <td>Barbecues</td>
+        // <td>Aramis</td>
+        // <td>110.00€</td>
+        // <td>Brun</td>
+    echo "</tr>";
 
 
-</html>
+
+
+
+
+
+
+
+    }
+
+     
+    ?>
+
+
+
+                    
+
+
+
+
+
+
+
+
+
+
+                   
+                    </tbody>        
+                    </table>
+                  </div>
+                </div>            
+            </div>
+<?php 
+    include("footer.php");
+?> 
+ 
